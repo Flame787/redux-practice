@@ -14,7 +14,8 @@ const counterSlice = createSlice({
       state.counter--;
     },
     increase(state, action) {
-      state.counter = state.counter + action.amount;
+    //   state.counter = state.counter + action.amount;
+      state.counter = state.counter + action.payload;
     },
     toggleCounter(state) {
       state.showCounter = !state.showCounter;
@@ -52,6 +53,7 @@ const counterSlice = createSlice({
 //   return state;
 // };
 
+
 const store = configureStore({
   reducer: counterSlice.reducer,
 });
@@ -59,5 +61,10 @@ const store = configureStore({
 // 1 configuration-object, u kojem postavljamo reducer-property. Value za reducer-property može biti: 1 reducer funkcija,
 // ili ako imamo multiple state slices -> onda object s nekim keyevima, i svaki ima kao value neku reducer-funkciju:
 // npr. reducer: { counter: counterSlice.reducer, user: userSlice.reducer, theme: themeSlice.reducer}
+
+// counterSlice.actions.toggleCounter
+// toggleCounter - action-creator method, jer automatski kreira action-object, s type-propertyjem
+
+export const counterActions = counterSlice.actions;
 
 export default store;
