@@ -1,47 +1,50 @@
 // import { createStore, combineReducers } from 'redux';  // createStore - deprecated, danas se koristi configureStore (iz Redux Toolkita)
-import { createSlice, configureStore } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 
-const initialCounterState = { counter: 0, showCounter: true };
+import counterReducer from "./counter";
+import authReducer from "./auth";
 
-const counterSlice = createSlice({
-  name: "counter",
-  initialState: initialCounterState,
-  reducers: {
-    increment(state) {
-      state.counter++;
-    },
-    decrement(state) {
-      state.counter--;
-    },
-    increase(state, action) {
-      //   state.counter = state.counter + action.amount;
-      state.counter = state.counter + action.payload;
-    },
-    toggleCounter(state) {
-      state.showCounter = !state.showCounter;
-    },
-  },
-});
+// const initialCounterState = { counter: 0, showCounter: true };
+
+// const counterSlice = createSlice({
+//   name: "counter",
+//   initialState: initialCounterState,
+//   reducers: {
+//     increment(state) {
+//       state.counter++;
+//     },
+//     decrement(state) {
+//       state.counter--;
+//     },
+//     increase(state, action) {
+//       //   state.counter = state.counter + action.amount;
+//       state.counter = state.counter + action.payload;
+//     },
+//     toggleCounter(state) {
+//       state.showCounter = !state.showCounter;
+//     },
+//   },
+// });
 
 // new slice of the state:
 
-const initialAuthState = {
-  isAuthenticated: false,
-};
+// const initialAuthState = {
+//   isAuthenticated: false,
+// };
 
-// creating new state-slice:
-const authSlice = createSlice({
-  name: "authentication",
-  initialState: initialAuthState,
-  reducers: {
-    login(state) {
-      state.isAuthenticated = true;
-    },
-    logout(state) {
-      state.isAuthenticated = false;
-    },
-  },
-});
+// // creating new state-slice:
+// const authSlice = createSlice({
+//   name: "authentication",
+//   initialState: initialAuthState,
+//   reducers: {
+//     login(state) {
+//       state.isAuthenticated = true;
+//     },
+//     logout(state) {
+//       state.isAuthenticated = false;
+//     },
+//   },
+// });
 
 // const counterReducer = (state = initialState, action) => {
 //   if (action.type === "increment") {
@@ -86,14 +89,15 @@ const authSlice = createSlice({
 
 // merging 2 reducer-functions together:
 const store = configureStore({
-  reducer: { counter: counterSlice.reducer, auth: authSlice.reducer },
+  // reducer: { counter: counterSlice.reducer, auth: authSlice.reducer },
+  reducer: { counter: counterReducer, auth: authReducer },
 });
 
 // counterSlice.actions.toggleCounter
 // toggleCounter - action-creator method, jer automatski kreira action-object, s type-propertyjem
 
-export const counterActions = counterSlice.actions;
+// export const counterActions = counterSlice.actions;
 // + new state-slice-actions:
-export const authActions = authSlice.actions;
+// export const authActions = authSlice.actions;
 
 export default store;
